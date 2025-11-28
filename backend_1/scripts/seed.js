@@ -10,9 +10,9 @@ dotenv.config();
 const MONGO = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/employee_task_db';
 
 const employees = [
-  { name: 'Alice Johnson', email: 'alice@example.com', position: 'Developer', department: 'Engineering', role: 'Developer' },
-  { name: 'Bob Smith', email: 'bob@example.com', position: 'Designer', department: 'Design', role: 'Designer' },
-  { name: 'Charlie Lee', email: 'charlie@example.com', position: 'PM', department: 'Product', role: 'Manager' },
+  { name: 'Alice Johnson', email: 'alice@example.com', department: 'Engineering', role: 'Developer' },
+  { name: 'Bob Smith', email: 'bob@example.com', department: 'Design', role: 'Designer' },
+  { name: 'Charlie Lee', email: 'charlie@example.com', department: 'Product', role: 'Manager' },
 ];
 
 const tasks = [
@@ -26,29 +26,41 @@ const run = async () => {
     await mongoose.connect(MONGO);
     console.log('Connected to DB');
 
+    // Clear existing data
     await Employee.deleteMany({});
     await Task.deleteMany({});
     await User.deleteMany({});
-    await User.deleteMany({});
 
+    // Create employees
     const created = await Employee.insertMany(employees);
+    console.log(`Created ${created.length} employees`);
 
-    // assign tasks to employees round-robin
-    const tasksToInsert = tasks.map((t, i) => ({ ...t, assignedTo: created[i % created.length]._id }));
+    // Assign tasks to employees round-robin
+    const tasksToInsert = tasks.map((t, i) => ({ 
+      ...t, 
+      assignedTo: created[i % created.length]._id 
+    }));
     await Task.insertMany(tasksToInsert);
-    // create default admin user
+    console.log(`Created ${tasksToInsert.length} tasks`);
+
+    // Create default admin user
     const adminPassword = process.env.SEED_ADMIN_PASSWORD || 'password';
     const hash = await bcrypt.hash(adminPassword, 10);
-    await User.create({ name: 'Admin', email: 'admin@example.com', password: hash });
+    await User.create({ 
+      name: 'Admin User', 
+      email: 'admin@example.com', 
+      password: hash 
+    });
+    console.log('Created admin user: admin@example.com / password');
 
-    // create default user
-    const passwordHash = await bcrypt.hash('password', 10);
-    await User.create({ name: 'Admin User', email: 'admin@example.com', password: passwordHash });
-
-    console.log('Seed data created successfully');
+    console.log('\n✅ Seed data created successfully!');
+    console.log('\nDefault credentials:');
+    console.log('  Email: admin@example.com');
+    console.log('  Password: password');
+    
     process.exit(0);
   } catch (err) {
-    console.error(err);
+    console.error('Seed error:', err);
     process.exit(1);
   }
 };
