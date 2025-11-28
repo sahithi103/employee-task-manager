@@ -2,6 +2,12 @@
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application for managing employees and tasks with JWT-based authentication.
 
+# Demo video
+Watch the screen recording of the app:
+
+https://github.com/user-attachments/assets/f01f9521-53bf-40df-a83c-a48046dc574d
+
+
 ## 🚀 Tech Stack
 
 ### Frontend
