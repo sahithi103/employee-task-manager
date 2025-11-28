@@ -4,8 +4,6 @@ import Employee from '../models/Employee.js';
 import Task from '../models/Task.js';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
-import User from '../models/User.js';
-import bcrypt from 'bcrypt';
 
 dotenv.config();
 
