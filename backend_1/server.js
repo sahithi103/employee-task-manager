@@ -4,6 +4,7 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import employeeRoutes from "./routes/employeeRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -17,9 +18,18 @@ app.use(express.json());
 
 app.use(cors());
 
+// Simple request logger to help debug route issues
+app.use((req, res, next) => {
+  console.log(new Date().toISOString(), req.method, req.originalUrl);
+  next();
+});
+
 
 app.use("/api/employees", employeeRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/auth", authRoutes);
+
+console.log('Mounted routes: /api/employees, /api/tasks, /api/auth');
 
 // Basic route
 app.get("/", (req, res) => {

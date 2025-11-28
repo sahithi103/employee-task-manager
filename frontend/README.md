@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+B: Add seed script, sample data, and fully document README + screenshots (fast, helps reviewers).# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +68,45 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Project-specific notes
+
+- This frontend was enhanced to use Tailwind CSS utility classes for layout and styling. For a quick demo Tailwind is included via CDN in `public/index.html`.
+- The frontend expects a backend API at `http://localhost:5000/api`. See `src/api/axios.js` to change the base URL.
+
+Authentication
+- A simple JWT-based authentication was added.
+- Seed script creates a default admin user: `admin@example.com` / `password`.
+- Protected actions (Add/Edit/Delete) require login. Use the Login page to authenticate.
+
+### Quick start (dev)
+
+```powershell
+cd frontend
+npm install
+npm start
+
+# make sure backend is running (backend_1 folder)
+cd ../backend_1
+npm install
+npm start
+```
+
+### Notes & next steps
+
+For production use, install Tailwind properly and remove the CDN script from `public/index.html`.
+The backend seed script (`backend_1/scripts/seed.js`) creates sample employees, tasks and a default admin user.
+
+### Default credentials (for reviewers)
+- Email: `admin@example.com`
+- Password: `password`
+
+### Run seed (backend)
+
+```powershell
+cd backend_1
+npm install
+npm run seed
+```
+
+After seeding, start the backend and frontend and login with the default credentials to access protected actions.
