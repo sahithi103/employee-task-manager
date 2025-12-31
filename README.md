@@ -198,27 +198,6 @@ employee-task-manager/
 - Real-time search for tasks by title/description
 - Search tasks from navbar (redirects to Tasks page with query)
 
-## 🎨 Screenshots
-
-### Login/Register Page
-![Login Page](screenshots/login.png)
-*Combined login and register form with toggle functionality*
-
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
-*Overview with statistics, quick actions, and recent tasks*
-
-### Employee List
-![Employees](screenshots/employees.png)
-*Employee management with search, add, edit, and delete*
-
-### Task List
-![Tasks](screenshots/tasks.png)
-*Task management with status indicators and employee assignment*
-
-### Add/Edit Forms
-![Forms](screenshots/forms.png)
-*Clean forms with validation and error handling*
 
 ## 🐛 Bug Fixes Implemented
 
@@ -289,11 +268,8 @@ For production deployment:
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👨‍💻 Author
 
-Your Name - [GitHub Profile](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - React documentation
 - Express.js documentation
